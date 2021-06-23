@@ -41,25 +41,14 @@ namespace FluentValidationTest.Filters
                     string.Empty)
             };
 
-            if (!validationProblemDetails
-                .Extensions
-                .ContainsKey(Constants.ProblemDetailsElements.TraceId))
-            {
-                validationProblemDetails
-                    .Extensions[Constants.ProblemDetailsElements.TraceId] = context
-                                                                                .HttpContext
-                                                                                .TraceIdentifier;
-            }
+            validationProblemDetails
+                .Extensions[Constants.ProblemDetailsElements.TraceId] = context
+                                                                            .HttpContext
+                                                                            .TraceIdentifier;
+            validationProblemDetails
+                .Extensions[Constants.ProblemDetailsElements.Type] = _apiBehaviourOptions
+                                                                        .ClientErrorMapping[StatusCodes.Status400BadRequest].Link;
 
-            if (!validationProblemDetails
-                .Extensions
-                .ContainsKey(Constants.ProblemDetailsElements.Type))
-            {
-                validationProblemDetails
-                    .Extensions[Constants.ProblemDetailsElements.Type] = _apiBehaviourOptions
-                                                                            .ClientErrorMapping[StatusCodes.Status400BadRequest].Link;
-            }
-            
             context.Result = new BadRequestObjectResult(validationProblemDetails)
             {
                 ContentTypes =
