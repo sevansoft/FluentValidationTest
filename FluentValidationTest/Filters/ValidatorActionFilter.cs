@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
-using System.Diagnostics.CodeAnalysis;
-using System.Net.Mime;
+using System;
 
 namespace FluentValidationTest.Filters
 {
@@ -14,7 +13,7 @@ namespace FluentValidationTest.Filters
 
         public ValidatorActionFilter(IOptions<ApiBehaviorOptions> apiBehaviourOptions)
         {
-            _apiBehaviourOptions = apiBehaviourOptions?.Value;
+            _apiBehaviourOptions = apiBehaviourOptions?.Value ?? throw new ArgumentNullException(nameof(apiBehaviourOptions));
         }
 
         /// <summary>
@@ -33,7 +32,7 @@ namespace FluentValidationTest.Filters
                 return;
             }
 
-            var validationProblemDetails = new ValidationProblemDetails(context.ModelState)
+            var validationValidationProblemDetails = new ValidationProblemDetails(context.ModelState)
             {
                 Instance = string.Concat(context.HttpContext.Request.Path,
                     context.HttpContext.Request.QueryString.HasValue ?
@@ -41,19 +40,18 @@ namespace FluentValidationTest.Filters
                     string.Empty)
             };
 
-            validationProblemDetails
-                .Extensions[Constants.ProblemDetailsElements.TraceId] = context
+            validationValidationProblemDetails
+                .Extensions[Constants.ValidationProblemDetailsElements.TraceId] = context
                                                                             .HttpContext
                                                                             .TraceIdentifier;
-            validationProblemDetails
-                .Extensions[Constants.ProblemDetailsElements.Type] = _apiBehaviourOptions
-                                                                        .ClientErrorMapping[StatusCodes.Status400BadRequest].Link;
+            validationValidationProblemDetails.Type = _apiBehaviourOptions
+                                                                        .ClientErrorMapping[StatusCodes.Status400BadRequest]
+                                                                        .Link;
 
-            context.Result = new BadRequestObjectResult(validationProblemDetails)
+            context.Result = new BadRequestObjectResult(validationValidationProblemDetails)
             {
                 ContentTypes =
                 {
-                    Constants.Produces.ApplicationJson,
                     Constants.Produces.ApplicationProblemJson
                 }
             };
@@ -67,8 +65,7 @@ namespace FluentValidationTest.Filters
 
         private static class Constants
         {
-            [SuppressMessage("ReSharper", "ConvertToConstant.Local")]
-            public static class ProblemDetailsElements
+            public static class ValidationProblemDetailsElements
             {
                 public static readonly string TraceId = "traceId";
                 public static readonly string Type = "type";
@@ -76,7 +73,6 @@ namespace FluentValidationTest.Filters
 
             public static class Produces
             {
-                public const string ApplicationJson = MediaTypeNames.Application.Json;
                 public const string ApplicationProblemJson = "application/problem+json";
             }
         }
