@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using System;
+using System.Diagnostics;
 
 namespace FluentValidationTest.Filters
 {
@@ -41,7 +42,7 @@ namespace FluentValidationTest.Filters
             };
 
             validationValidationProblemDetails
-                .Extensions[Constants.ValidationProblemDetailsElements.TraceId] = context
+                .Extensions[Constants.ValidationProblemDetailsElements.TraceId] = Activity.Current?.Id ?? context
                                                                             .HttpContext
                                                                             .TraceIdentifier;
             validationValidationProblemDetails.Type = _apiBehaviourOptions
