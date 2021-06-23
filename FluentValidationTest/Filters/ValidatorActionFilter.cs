@@ -68,7 +68,6 @@ namespace FluentValidationTest.Filters
             public static class ValidationProblemDetailsElements
             {
                 public static readonly string TraceId = "traceId";
-                public static readonly string Type = "type";
             }
 
             public static class Produces
