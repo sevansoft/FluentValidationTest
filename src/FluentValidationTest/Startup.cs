@@ -30,7 +30,7 @@ namespace FluentValidationTest
             services
                 .AddMvc(options =>
                 {
-                    options.Filters.Add<ValidatorActionFilter>();
+                    options.Filters.Add<ValidatorErrorFilter>();
                 })
                 .AddJsonOptions(options =>
                 {
