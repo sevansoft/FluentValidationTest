@@ -4,15 +4,17 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FluentValidationTest.Filters
 {
     // ReSharper disable once ClassNeverInstantiated.Global
-    public class ValidatorActionFilter : IAlwaysRunResultFilter, IOrderedFilter
+    [SuppressMessage("ReSharper", "ConvertToConstant.Local")]
+    public class ValidatorErrorFilter : IAlwaysRunResultFilter, IOrderedFilter
     {
         private readonly ApiBehaviorOptions _apiBehaviourOptions;
 
-        public ValidatorActionFilter(IOptions<ApiBehaviorOptions> apiBehaviourOptions)
+        public ValidatorErrorFilter(IOptions<ApiBehaviorOptions> apiBehaviourOptions)
         {
             _apiBehaviourOptions = apiBehaviourOptions?.Value ?? throw new ArgumentNullException(nameof(apiBehaviourOptions));
         }

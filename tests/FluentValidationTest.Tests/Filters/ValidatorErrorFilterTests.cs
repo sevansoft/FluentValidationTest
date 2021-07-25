@@ -9,18 +9,21 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using Xunit;
 
 namespace FluentValidationTest.Tests.Filters
 {
-    public class ValidatorActionFilterTests
+    [SuppressMessage("ReSharper", "CA1806")]
+    [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
+    public class ValidatorErrorFilterTests
     {
 
         [Fact]
         public void Order_Should_Be_Set_To_Minus_1500()
         {
-            // ARrange
+            // Arrange
             // Act
             // Assert
             GetFilter()
@@ -87,9 +90,9 @@ namespace FluentValidationTest.Tests.Filters
         public void OnResultExecuting_Should_Generate_ValidationProblemDetails()
         {
             // Arrange
-            string path = "/api/path";
-            string queryString = "?q1=a&q2=b";
-            string pathAndQuery = $"{path}{queryString}";
+            const string path = "/api/path";
+            const string queryString = "?q1=a&q2=b";
+            var pathAndQuery = $"{path}{queryString}";
 
             var context = GetExecutingContext(new OkResult(), path, queryString);
             var filter = GetFilter();
@@ -143,7 +146,7 @@ namespace FluentValidationTest.Tests.Filters
         public void Should_Throw_ArgumentNullException_When_ApiBehaviorOptions_Is_Null()
         {
             // Act
-            Action constructor = () => new ValidatorActionFilter(default);
+            Action constructor = () => new ValidatorErrorFilter(default);
 
             // Assert
             constructor
@@ -156,7 +159,7 @@ namespace FluentValidationTest.Tests.Filters
         public void Should_NotThrow_Exception_When_ApiBehaviorOptions_Is_Not_Null()
         {
             // Act
-            Action constructor = () => new ValidatorActionFilter(GetOptions());
+            Action constructor = () => new ValidatorErrorFilter(GetOptions());
 
             // Assert
             constructor
@@ -237,16 +240,16 @@ namespace FluentValidationTest.Tests.Filters
         }
 
 
-        private static ValidatorActionFilter GetFilter(IOptions<ApiBehaviorOptions> options = null)
+        private static ValidatorErrorFilter GetFilter(IOptions<ApiBehaviorOptions> options = null)
         {
             var apiBehaviorOptions = options ?? GetOptions();
-            return new ValidatorActionFilter(apiBehaviorOptions); ;
+            return new ValidatorErrorFilter(apiBehaviorOptions);
         }
 
-        public static IOptions<ApiBehaviorOptions> GetOptions()
+        private static IOptions<ApiBehaviorOptions> GetOptions()
         {
             var apiBehaviorOptions = new ApiBehaviorOptions();
-            apiBehaviorOptions.ClientErrorMapping.Add((int)HttpStatusCode.BadRequest, new ClientErrorData()
+            apiBehaviorOptions.ClientErrorMapping.Add((int)HttpStatusCode.BadRequest, new ClientErrorData
             {
                 Title = ReasonPhrases.GetReasonPhrase((int)HttpStatusCode.BadRequest),
                 Link = "https://tools.ietf.org/html/rfc7231#section-6.5.1"
