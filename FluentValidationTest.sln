@@ -6,6 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EC869AC-C35B-48C7-9EDC-F9A1DC37EA4D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		nuget-officialonly.config = nuget-officialonly.config
+		nuget.config = nuget.config
+		run-tests.bat = run-tests.bat
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BDD07D52-9A8C-4677-8957-F68AFADBF685}"

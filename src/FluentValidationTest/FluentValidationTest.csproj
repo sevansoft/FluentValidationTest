@@ -16,4 +16,11 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
   </ItemGroup>
 
+  <ItemGroup>
+	<PackageReference Update="Microsoft.CodeAnalysis.CSharp.CodeStyle" Version="3.11.0">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+  </ItemGroup>
+
 </Project>
