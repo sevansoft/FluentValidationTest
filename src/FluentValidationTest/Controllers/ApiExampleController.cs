@@ -19,7 +19,7 @@ namespace FluentValidationTest.Controllers
         // ReSharper disable once StringLiteralTypo
         [HttpPost("api/dostuff")]
         // ReSharper disable once UnusedParameter.Global
-        public IActionResult DoStuff([Required, FromBody]DoStuffModel doStuffModel)
+        public IActionResult DoStuff([Required, FromBody] DoStuffModel doStuffModel)
         {
             // ReSharper disable once PossibleNullReferenceException
             // ReSharper disable once TemplateIsNotCompileTimeConstantProblem

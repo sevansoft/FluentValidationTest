@@ -1,8 +1,8 @@
-using FluentValidationTest.Models;
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using FluentValidationTest.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace FluentValidationTest.Controllers
@@ -16,7 +16,7 @@ namespace FluentValidationTest.Controllers
         {
             _logger = logger;
         }
-        
+
         [HttpPost("mvcapiattribute/dostuff")]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         // ReSharper disable once UnusedParameter.Global
