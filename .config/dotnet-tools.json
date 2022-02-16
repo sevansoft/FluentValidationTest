@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotnet-format": {
+      "version": "5.1.250801",
+      "commands": [
+        "dotnet-format"
+      ]
+    },
+    "dotnet-sonarscanner": {
+      "version": "5.5.2",
+      "commands": [
+        "dotnet-sonarscanner"
+      ]
+    },
+    "dotnet-reportgenerator-globaltool": {
+      "version": "5.0.4",
+      "commands": [
+        "reportgenerator"
+      ]
+    }
+  }
+}
