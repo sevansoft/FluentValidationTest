@@ -8,6 +8,6 @@ dotnet tool restore -v d
 
 dotnet test ".\tests\FluentValidationTest.Tests\FluentValidationTest.Tests.csproj" --no-build --configuration Release --collect:"xplat code coverage" --results-directory ./BuildReports/UnitTests/FluentValidationTest/net5.0 /p:CollectCoverage=true /p:CoverletOutput=..\..\BuildReports\Coverage\FluentValidationTest\net5.0\ /p:CoverletOutputFormat=cobertura /p:Exclude=\"[xunit.*]*"
 
-tools\reportgenerator "-reports:BuildReports\Coverage\FluentValidationTest\net5.0\coverage.cobertura.xml" "-targetdir:BuildReports\Coverage\FluentValidationTest\net5.0" -reporttypes:HtmlInline_AzurePipelines;Cobertura; -assemblyfilters:-xunit*.* -verbosity:Verbose
+reportgenerator "-reports:BuildReports\Coverage\FluentValidationTest\net5.0\coverage.cobertura.xml" "-targetdir:BuildReports\Coverage\FluentValidationTest\net5.0" -reporttypes:HtmlInline_AzurePipelines;Cobertura; -assemblyfilters:-xunit*.* -verbosity:Verbose
 
 start BuildReports\Coverage\FluentValidationTest\net5.0\index.htm
