@@ -1,3 +1,6 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using FluentValidationTest.Filters;
 using Microsoft.AspNetCore.Builder;
@@ -5,9 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace FluentValidationTest
 {
@@ -23,8 +23,6 @@ namespace FluentValidationTest
             _environment = environment;
         }
 
-
-        [SuppressMessage("ReSharper", "CA1822")]
         public void ConfigureServices(IServiceCollection services)
         {
             services
@@ -36,12 +34,15 @@ namespace FluentValidationTest
                 {
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                })
-                .AddFluentValidation(config =>
-                {
-                    config.DisableDataAnnotationsValidation = true;
-                    config.RegisterValidatorsFromAssemblyContaining<Startup>();
                 });
+
+            services
+                 .AddFluentValidationAutoValidation(config =>
+                 {
+                     config.DisableDataAnnotationsValidation = true;
+                     //config.RegisterValidatorsFromAssemblyContaining<Startup>();
+                 })
+                 .AddValidatorsFromAssemblyContaining<Startup>();
         }
 
         public void Configure(IApplicationBuilder app)
