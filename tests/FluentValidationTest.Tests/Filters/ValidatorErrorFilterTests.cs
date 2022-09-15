@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using FluentAssertions;
 using FluentValidationTest.Filters;
 using Microsoft.AspNetCore.Http;
@@ -7,16 +11,11 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Net;
 using Xunit;
 
 namespace FluentValidationTest.Tests.Filters
 {
     [SuppressMessage("ReSharper", "CA1806")]
-    [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
     public class ValidatorErrorFilterTests
     {
 
