@@ -40,7 +40,6 @@ namespace FluentValidationTest
                  .AddFluentValidationAutoValidation(config =>
                  {
                      config.DisableDataAnnotationsValidation = true;
-                     //config.RegisterValidatorsFromAssemblyContaining<Startup>();
                  })
                  .AddValidatorsFromAssemblyContaining<Startup>();
         }
