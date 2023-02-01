@@ -1,10 +1,10 @@
+using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
-using System;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 
 namespace FluentValidationTest.Filters
 {
@@ -16,7 +16,7 @@ namespace FluentValidationTest.Filters
 
         public ValidatorErrorFilter(IOptions<ApiBehaviorOptions> apiBehaviourOptions)
         {
-            _apiBehaviourOptions = apiBehaviourOptions?.Value ?? throw new ArgumentNullException(nameof(apiBehaviourOptions));
+            ArgumentNullException.ThrowIfNull(_apiBehaviourOptions = apiBehaviourOptions?.Value, nameof(apiBehaviourOptions));
         }
 
         /// <summary>
