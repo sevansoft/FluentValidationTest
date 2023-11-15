@@ -1,6 +1,10 @@
 <Project>
 
   <PropertyGroup>
+    <TargetFrameworkVersion>net8.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
   </PropertyGroup>
 

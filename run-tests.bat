@@ -6,8 +6,8 @@ msbuild.exe "FluentValidationTest.sln" /nologo /nr:false /p:platform="any cpu" /
 
 dotnet tool restore -v d
 
-dotnet test ".\tests\FluentValidationTest.Tests\FluentValidationTest.Tests.csproj" --no-build --configuration Release --collect:"xplat code coverage" --results-directory ./BuildReports/UnitTests/FluentValidationTest/net7.0
+dotnet test ".\tests\FluentValidationTest.Tests\FluentValidationTest.Tests.csproj" --no-build --configuration Release --collect:"xplat code coverage" --results-directory ./BuildReports/UnitTests/FluentValidationTest/net8.0
 
-reportgenerator "-reports:BuildReports\UnitTests\**\coverage.cobertura.xml" "-targetdir:BuildReports\Coverage\FluentValidationTest\net7.0" -reporttypes:HtmlInline_AzurePipelines;Cobertura; -assemblyfilters:-xunit*.* -verbosity:Verbose
+reportgenerator "-reports:BuildReports\UnitTests\**\coverage.cobertura.xml" "-targetdir:BuildReports\Coverage\FluentValidationTest\net8.0" -reporttypes:HtmlInline_AzurePipelines;Cobertura; -assemblyfilters:-xunit*.* -verbosity:Verbose
 
-start BuildReports\Coverage\FluentValidationTest\net7.0\index.htm
+start BuildReports\Coverage\FluentValidationTest\net8.0\index.htm
